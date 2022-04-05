@@ -299,9 +299,18 @@ variable "default_webhook_insecure_ssl" {
   default     = false
 }
 
-
 variable "default_webhook_url" {
   type        = string
   description = "(optional) Default webhook url"
+  default     = null
+}
+
+# --------------------------------------------------------------------------------------------------
+# Default teams variables
+# --------------------------------------------------------------------------------------------------
+
+variable "default_team_permission" {
+  type        = string
+  description = "(optional) Default permission for organisation team for a repo"
   default     = null
 }

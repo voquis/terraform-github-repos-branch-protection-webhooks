@@ -46,6 +46,9 @@ module "repos-full" {
     "push"
   ]
 
+  # Configure team permission defaults if a repo specifies a teams block
+  default_team_permission = "maintain"
+
   # Define repos
   repos = {
     my-repo-1 = {
@@ -82,6 +85,12 @@ module "repos-full" {
             "push"
           ]
           url = "https://example.com/github-webhook/"
+        }
+      ]
+      team = [
+        {
+          team_id    = "my-team"
+          permission = "push"
         }
       ]
     }
