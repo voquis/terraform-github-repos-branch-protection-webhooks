@@ -57,6 +57,11 @@ variable "repos" {
       secret       = optional(string)
       url          = string
     })))
+    // Organisation team permissions config
+    teams = optional(list(object({
+      team_id    = string
+      permission = optional(string)
+    })))
   }))
   description = "(optional) List of repositories"
 }

@@ -126,3 +126,20 @@ resource "github_repository_webhook" "this" {
     url          = lookup(each.value.webhook, "url", null) == null ? var.default_webhook_url : each.value.webhook.url
   }
 }
+
+# --------------------------------------------------------------------------------------------------
+# Configure organisation team permissions for repository
+# https://registry.terraform.io/providers/integrations/github/latest/docs/resources/team_repository
+# --------------------------------------------------------------------------------------------------
+
+resource "github_team_repository" "this" {
+  # Flatten nested structure
+  # https://www.terraform.io/language/functions/flatten#flattening-nested-structures-for-for_each
+  for_each = {
+    for team in local.teams : "${team.repo_name}.${team.team_i}" => team
+  }
+
+  team_id    = each.value.team_id
+  repository = each.value.repo_name
+  permission = lookup(each.value.team, "permission", null) == null ? var.default_team_permission : each.value.team.permission
+}
