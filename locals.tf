@@ -26,4 +26,18 @@ locals {
       }
     ]
   ])
+
+  # Extract optional teams list.
+  # Flattens nested structure:
+  # https://www.terraform.io/language/functions/flatten#flattening-nested-structures-for-for_each
+  teams = flatten([
+    for repo_name, repo in var.repos : [
+      for team_i, team in(lookup(repo, "teams", null) == null ? [] : repo.teams) : {
+        repo_name = repo_name
+        team_i    = team_i
+        repo      = repo
+        team      = team
+      }
+    ]
+  ])
 }
