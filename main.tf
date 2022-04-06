@@ -139,7 +139,7 @@ resource "github_team_repository" "this" {
     for team in local.teams : "${team.repo_name}.${team.team_i}" => team
   }
 
-  team_id    = each.value.team_id
+  team_id    = each.value.team.team_id
   repository = each.value.repo_name
   permission = lookup(each.value.team, "permission", null) == null ? var.default_team_permission : each.value.team.permission
 }
