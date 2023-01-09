@@ -1,7 +1,7 @@
 # terraform-github-repos-default-branch-protection
 
 Terraform module to manage GitHub repos, multiple branch protection per repo and multiple webhooks per repo.
-Uses experimental feature to make use of the `optional` keyword.
+Requires Terraform 1.3+ to make use of the `optional` keyword.
 ## Authentication
 Set token and optionally owner with:
 ```shell
