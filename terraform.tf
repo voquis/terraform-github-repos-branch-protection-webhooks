@@ -1,6 +1,8 @@
 terraform {
-  experiments = [
-    // Experimental feature to allow optional object keys in variables
-    module_variable_optional_attrs
-  ]
+  required_providers {
+    github = {
+      source  = "integrations/github"
+      version = "~> 4.0"
+    }
+  }
 }
